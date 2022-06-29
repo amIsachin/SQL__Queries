@@ -26,3 +26,12 @@ INSERT INTO Course VALUES ('c-sharp', GETDATE(), 10000)
 
 SELECT * FROM University__Student
 SELECT * FROM Course
+
+--- Stored Procedures -----
+--Get All University Student
+CREATE PROCEDURE spGetAllUniversityStudent AS
+BEGIN
+	SELECT * FROM University__Student
+END
+
+EXECUTE spGetAllUniversityStudent
