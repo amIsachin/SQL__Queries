@@ -35,3 +35,11 @@ BEGIN
 END
 
 EXECUTE spGetAllUniversityStudent
+
+-- Get all Courses
+CREATE PROCEDURE spGetAllCourses AS 
+BEGIN
+	SELECT * FROM Course
+END 
+
+EXECUTE spGetAllCourses
