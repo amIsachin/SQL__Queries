@@ -21,8 +21,10 @@ CREATE TABLE Course
 	ON DELETE CASCADE
 );
 
-INSERT INTO University__Student VALUES ('Sachin', 23,'Male',1200,'Delhi','Document','Image',GETDATE())
+-- Queries --
+INSERT INTO University__Student VALUES ('Venkat', 23,'Male',1200,'Delhi','Document','Image',GETDATE())
 INSERT INTO Course VALUES ('c-sharp', GETDATE(), 10000)
+INSERT INTO Course VALUES ('Sql-Server', GETDATE(), 10001)
 
 SELECT * FROM University__Student
 SELECT * FROM Course
