@@ -22,7 +22,7 @@ CREATE TABLE Course
 );
 
 -- Queries --
-INSERT INTO University__Student VALUES ('Venkat', 23,'Male',1200,'Delhi','Document','Image',GETDATE())
+INSERT INTO University__Student VALUES ('Ident_Current', 23,'Male',1200,'Delhi','Document','Image',GETDATE())
 INSERT INTO Course VALUES ('c-sharp', GETDATE(), 10000)
 INSERT INTO Course VALUES ('Sql-Server', GETDATE(), 10001)
 
@@ -45,3 +45,29 @@ BEGIN
 END 
 
 EXECUTE spGetAllCourses
+
+-- Insert StudentCombineCourse
+ALTER PROCEDURE spInsertUniversityStudentCombineCourse
+(
+	@Name VARCHAR(255),  @Age INT,  @Gender VARCHAR(255),
+	@Fees INT,  @City VARCHAR(255), @Document NVARCHAR(255),
+	@Image NVARCHAR(MAX), @CreaedOn DATE,
+
+	@CourseName VARCHAR(255),  @CreatedOn DATE
+)
+AS
+BEGIN
+	--SET @CreaedOn = ISNULL(@CreaedOn ,GETDATE())
+	INSERT INTO University__Student VALUES (@Name, @Age, @Gender, @Fees, @City, @Document, @Image, @CreaedOn)
+	INSERT INTO Course VALUES (@CourseName, @CreaedOn, IDENT_CURRENT('University__Student'))
+END
+
+EXECUTE spInsertUniversityStudentCombineCourse 'test', 10, 'testGender', 1200, 'testCity', 'testDocument', 'testImage','2022-07-05 13:11:10.237', 'testCourse', '2022-07-05 13:11:10.237'
+
+--Get Course By ID
+CREATE PROCEDURE spGetCourseByID (@ID INT) AS
+BEGIN
+	SELECT * FROM Course WHERE ID = @ID
+END
+
+EXECUTE spGetCourseByID 4
