@@ -71,3 +71,11 @@ BEGIN
 END
 
 EXECUTE spGetCourseByID 4
+
+-- Get course Name distinct
+CREATE PROCEDURE spGetDistinctCourseName AS
+BEGIN
+	SELECT DISTINCT Name FROM Course
+END
+
+EXECUTE spGetDistinctCourseName
