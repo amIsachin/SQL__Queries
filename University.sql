@@ -21,6 +21,17 @@ CREATE TABLE Course
 	ON DELETE CASCADE
 );
 
+CREATE TABLE CreateAccount
+(
+	ID INT PRIMARY KEY IDENTITY(1,1),
+	User__Name VARCHAR(255),
+	Email NVARCHAR(255) NULL,
+	Number VARCHAR(255) NULL,
+	[Password] VARCHAR(255),
+	Confirm__Password VARCHAR(255),
+	CreatedOn DATE
+);
+
 -- Queries --
 INSERT INTO University__Student VALUES ('Ident_Current', 23,'Male',1200,'Delhi','Document','Image',GETDATE())
 INSERT INTO Course VALUES ('c-sharp', GETDATE(), 10000)
@@ -28,6 +39,7 @@ INSERT INTO Course VALUES ('Sql-Server', GETDATE(), 10001)
 
 SELECT * FROM University__Student
 SELECT * FROM Course
+SELECT * FROM CreateAccount
 
 --- Stored Procedures -----
 --Get All University Student
