@@ -41,6 +41,8 @@ SELECT * FROM University__Student
 SELECT * FROM Course
 SELECT * FROM CreateAccount
 
+TRUNCATE TABLE CreateAccount
+
 --- Stored Procedures -----
 --Get All University Student
 CREATE PROCEDURE spGetAllUniversityStudent AS
@@ -97,10 +99,22 @@ ALTER PROCEDURE spInsertCreateAccount
 (
 	@UserName VARCHAR(255), @Email NVARCHAR(255) NULL, @Number VARCHAR(255) NULL,
 	@Password NVARCHAR(255), @ConfirmPassword NVARCHAR(255), @CreatedOn DATE
-) AS 
+) 
+AS 
 BEGIN
-	INSERT INTO CreateAccount VALUES (@UserName, @Email, @Number, @Password, @ConfirmPassword, @CreatedOn)
+	if(@Number = '')
+	BEGIN
+		INSERT INTO CreateAccount (User__Name, Email, Password, Confirm__Password, CreatedOn) VALUES	
+		(@UserName, @Email, @Password, @ConfirmPassword, @CreatedOn)
+	END
+	ELSE
+	BEGIN
+		INSERT INTO CreateAccount (User__Name, Number, Password, Confirm__Password, CreatedOn) VALUES
+		(@UserName, @Number, @Password, @ConfirmPassword, @CreatedOn)
+	END
 END
 
 EXECUTE spInsertCreateAccount 'Sachin', 'sachin@hotmail.com', '+91 123 456 789', 'sachin123', 'sachin123', '2022-07-19 13:21:49.360'
 
+INSERT INTO CreateAccount (User__Name, Email, Password, Confirm__Password, CreatedOn) VALUES
+('sachin', 'sachin@hotmial.com', '123','123','2022-07-20 14:47:00.167')
