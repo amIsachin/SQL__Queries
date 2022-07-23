@@ -86,7 +86,7 @@ END
 
 EXECUTE spGetCourseByID 4
 
--- Get course Name distinct
+-- Get course Name distinct this service is not rigth now.
 CREATE PROCEDURE spGetDistinctCourseName AS
 BEGIN
 	SELECT DISTINCT Name FROM Course
@@ -118,3 +118,11 @@ EXECUTE spInsertCreateAccount 'Sachin', 'sachin@hotmail.com', '+91 123 456 789',
 
 INSERT INTO CreateAccount (User__Name, Email, Password, Confirm__Password, CreatedOn) VALUES
 ('sachin', 'sachin@hotmial.com', '123','123','2022-07-20 14:47:00.167')
+
+-- Get all CreateAccount
+CREATE PROCEDURE spGetAllCreateAccount AS
+BEGIN
+	SELECT * FROM CreateAccount
+END
+
+EXECUTE spGetAllCreateAccount
