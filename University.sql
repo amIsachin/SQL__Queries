@@ -32,14 +32,26 @@ CREATE TABLE CreateAccount
 	CreatedOn DATE
 );
 
+CREATE TABLE UserRole
+(
+	ID INT PRIMARY KEY IDENTITY(1,1),
+	[Role] VARCHAR(255),
+	User__ID INT FOREIGN KEY REFERENCES CreateAccount(ID),
+	CreatedOn DATE
+);
+
+
+
 -- Queries --
 INSERT INTO University__Student VALUES ('Ident_Current', 23,'Male',1200,'Delhi','Document','Image',GETDATE())
 INSERT INTO Course VALUES ('c-sharp', GETDATE(), 10000)
 INSERT INTO Course VALUES ('Sql-Server', GETDATE(), 10001)
+INSERT INTO UserRole VALUES ('Admin', 1, GETDATE())
 
 SELECT * FROM University__Student
 SELECT * FROM Course
 SELECT * FROM CreateAccount
+SELECT * FROM UserRole
 
 TRUNCATE TABLE CreateAccount
 
@@ -126,3 +138,14 @@ BEGIN
 END
 
 EXECUTE spGetAllCreateAccount
+
+-- Ger all user roles.
+CREATE PROCEDURE GetAllUserRoles AS
+BEGIN
+	SELECT * FROM UserRole
+END
+
+SELECT * FROM UserRole AS A
+INNER JOIN CreateAccount AS B
+ON A.User__ID = B.ID
+WHERE A.Role = 'Admin'
