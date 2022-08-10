@@ -145,7 +145,11 @@ BEGIN
 	SELECT * FROM UserRole
 END
 
-SELECT * FROM UserRole AS A
-INNER JOIN CreateAccount AS B
-ON A.User__ID = B.ID
-WHERE A.Role = 'Admin'
+CREATE PROCEDURE InnerJoinUserRoleWithCreateAccount AS
+BEGIN
+	SELECT * FROM UserRole AS A
+	INNER JOIN CreateAccount AS B
+	ON A.User__ID = B.ID
+END
+
+EXECUTE InnerJoinUserRoleWithCreateAccount
