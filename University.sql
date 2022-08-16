@@ -145,6 +145,7 @@ BEGIN
 	SELECT * FROM UserRole
 END
 
+-- Procedure.
 CREATE PROCEDURE InnerJoinUserRoleWithCreateAccount AS
 BEGIN
 	SELECT * FROM UserRole AS A
@@ -153,3 +154,14 @@ BEGIN
 END
 
 EXECUTE InnerJoinUserRoleWithCreateAccount
+
+-- Procedure.
+CREATE PROCEDURE InnerJoinUserRoleWithCreateAccountWithParam(@UserName VARCHAR(255)) AS
+BEGIN
+	SELECT * FROM UserRole AS A
+	INNER JOIN CreateAccount AS B
+	ON A.User__ID = B.ID
+	WHERE A.Role = @UserName
+END
+
+EXECUTE InnerJoinUserRoleWithCreateAccountWithParam 'Admin'
